@@ -5,6 +5,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ContactManagerGUI extends Application {
 
     private ContactManager manager = new ContactManager();
@@ -22,25 +25,70 @@ public class ContactManagerGUI extends Application {
         VBox root = new VBox(10);
         root.setPadding(new Insets(10));
 
+        // Buttons (without Search)
         Button addButton = new Button("Add Contact");
-        Button searchButton = new Button("Search");
         Button deleteButton = new Button("Delete Selected");
         Button editButton = new Button("Edit Selected");
 
-        HBox buttons = new HBox(10, addButton, searchButton, deleteButton, editButton);
+        HBox buttons = new HBox(10, addButton, deleteButton, editButton);
+
+        // Filter input fields
+        TextField filterName = new TextField();
+        filterName.setPromptText("Name");
+        TextField filterPhone = new TextField();
+        filterPhone.setPromptText("Phone");
+        TextField filterEmail = new TextField();
+        filterEmail.setPromptText("Email");
+        TextField filterAddress = new TextField();
+        filterAddress.setPromptText("Address");
+        TextField filterBirthDate = new TextField();
+        filterBirthDate.setPromptText("Birth Date");
+        TextField filterGroup = new TextField();
+        filterGroup.setPromptText("Group");
+        TextField filterCompany = new TextField();
+        filterCompany.setPromptText("Company");
+        TextField filterDepartment = new TextField();
+        filterDepartment.setPromptText("Department");
+
+        Button filterButton = new Button("Filter");
+
+        HBox filterBox = new HBox(5,
+                filterName, filterPhone, filterEmail, filterAddress, filterBirthDate,
+                filterGroup, filterCompany, filterDepartment, filterButton);
+        filterBox.setPadding(new Insets(10));
 
         listView.setPrefHeight(300);
 
-        root.getChildren().addAll(countLabel, buttons, listView);
+        root.getChildren().addAll(countLabel, buttons, filterBox, listView);
 
         refreshList();
 
+        // Button actions
         addButton.setOnAction(e -> showAddDialog());
-        searchButton.setOnAction(e -> showSearchDialog());
         deleteButton.setOnAction(e -> deleteSelected());
         editButton.setOnAction(e -> showEditDialog());
 
-        stage.setScene(new Scene(root, 650, 450));
+        filterButton.setOnAction(e -> {
+            Map<String, String> criteria = new HashMap<>();
+            criteria.put("name", filterName.getText());
+            criteria.put("phone", filterPhone.getText());
+            criteria.put("email", filterEmail.getText());
+            criteria.put("address", filterAddress.getText());
+            criteria.put("birthdate", filterBirthDate.getText());
+            criteria.put("group", filterGroup.getText());
+            criteria.put("company", filterCompany.getText());
+            criteria.put("department", filterDepartment.getText());
+
+            var filteredContacts = manager.filter(criteria);
+
+            countLabel.setText(filteredContacts.size() + " contacts found");
+            listView.getItems().clear();
+            for (Contact c : filteredContacts) {
+                listView.getItems().add(c.toString());
+            }
+        });
+
+        stage.setScene(new Scene(root, 900, 500));
         stage.show();
     }
 
@@ -81,22 +129,21 @@ public class ContactManagerGUI extends Application {
 
         Button okButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
         okButton.addEventFilter(javafx.event.ActionEvent.ACTION, event -> {
-           
             if (!validateContactForm(name, phone, email, birthDate)) {
-                event.consume(); 
+                event.consume();
             }
         });
 
         dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
                 return new Contact(
-                    name.getText().trim(),
-                    phone.getText().trim(),
-                    email.getText().trim(),
-                    address.getText().trim(),
-                    birthDate.getText().trim(),
-                    group.getText().trim(),
-                    new Company(companyName.getText().trim(), department.getText().trim())
+                        name.getText().trim(),
+                        phone.getText().trim(),
+                        email.getText().trim(),
+                        address.getText().trim(),
+                        birthDate.getText().trim(),
+                        group.getText().trim(),
+                        new Company(companyName.getText().trim(), department.getText().trim())
                 );
             }
             return null;
@@ -105,26 +152,6 @@ public class ContactManagerGUI extends Application {
         dialog.showAndWait().ifPresent(contact -> {
             manager.addContact(contact);
             refreshList();
-        });
-    }
-
-    private void showSearchDialog() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Search by Name");
-        dialog.setHeaderText("Enter full name (e.g., Mammadov_Ali):");
-        dialog.showAndWait().ifPresent(name -> {
-            Contact found = manager.searchByName(name.trim());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            if (found != null) {
-                alert.setTitle("Contact Found");
-                alert.setHeaderText(null);
-                alert.setContentText(found.toString());
-            } else {
-                alert.setAlertType(Alert.AlertType.WARNING);
-                alert.setTitle("Not Found");
-                alert.setContentText("No contact with that name.");
-            }
-            alert.showAndWait();
         });
     }
 
@@ -195,13 +222,13 @@ public class ContactManagerGUI extends Application {
         dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
                 return new Contact(
-                    name.getText().trim(),
-                    phone.getText().trim(),
-                    email.getText().trim(),
-                    address.getText().trim(),
-                    birthDate.getText().trim(),
-                    group.getText().trim(),
-                    new Company(companyName.getText().trim(), department.getText().trim())
+                        name.getText().trim(),
+                        phone.getText().trim(),
+                        email.getText().trim(),
+                        address.getText().trim(),
+                        birthDate.getText().trim(),
+                        group.getText().trim(),
+                        new Company(companyName.getText().trim(), department.getText().trim())
                 );
             }
             return null;
