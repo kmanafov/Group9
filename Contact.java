@@ -45,4 +45,8 @@ public class Contact {
                " | Group: " + group +
                " | Company: " + company;
     }
+
+    Object getName() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
