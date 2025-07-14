@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch ContactManagerGUI",
+      "request": "launch",
+      "mainClass": "ContactManagerGUI",
+      "vmArgs": "-cp \"C:/Users/ASUS/Downloads/javafx-sdk-21.0.2/lib/*\""
+    }
+  ]
+}
