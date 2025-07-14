@@ -1,0 +1,10 @@
+Nigar Hasanova;+994501040421;nigarhesenova@example.com;Shaki, M.A.Rasulzada str.;12.03.1995;Family;Azercell;Marketing
+Rashad Aliyev;+994505459263;resadeliyev@example.com;Baku, Yasamal;24.07.1990;Family;SOCAR;Procurement
+Aysel Mammadli;+994502992946;ayselmemmedli@example.com;Sumqayit, 9-cu mkr;01.01.1988;Family;Kapital Bank;Human Resources
+Tural Quliyev;+994506224866;turalquliyev@example.com;Baku, Yasamal;09.09.1992;Work;Kapital Bank;Human Resources
+Leyla Nuriyeva;+994501852237;leylanuriyeva@example.com;Xirdalan;15/04/1997;Friend;Bakcell;İT
+Orxan Abbasov;+994509855787;orxanabbasov@example.com;Shaki, M.A.Rasulzada str.;03.06.1985;Work;Bakcell;İT
+Gunay Huseynli;+994506888878;gunayhuseynli@example.com;Sumqayti, 9-cu mkr;21.11.1994;Friend;Bakcell;İT
+Elchin Rzayev;+994507626711;elcinrzayev@example.com;Ganja, Nizami;30.08.1991;Family;Azercell;Marketing
+Zahra Ahmadova;+994505245895;zehraehmedova@example.com;Baku, Yasamal;17.02.1996;Work;SOCAR;Procurement
+Samir Mammadov;+994507026613;samirmemmedov@example.com;Bakı, Yasamal;05.12.1989;Work;PAŞA Bank;Finance
