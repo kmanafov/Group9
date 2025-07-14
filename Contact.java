@@ -1,15 +1,15 @@
 public class Contact {
-    private String fullName;
+    String name; 
     private String phoneNumber;
     private String email;
     private String address;
     private String birthDate;
     private String group;
-    private Company company;  
+    private Company company;
 
-    public Contact(String fullName, String phoneNumber, String email, String address,
-                   String birthDate, String group, Company company) {
-        this.fullName = fullName;
+    public Contact(String name, String phoneNumber, String email,
+                   String address, String birthDate, String group, Company company) {
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
@@ -18,8 +18,7 @@ public class Contact {
         this.company = company;
     }
 
-   
-    public String getFullName() { return fullName; }
+    public String getName() { return name; }
     public String getPhoneNumber() { return phoneNumber; }
     public String getEmail() { return email; }
     public String getAddress() { return address; }
@@ -27,7 +26,7 @@ public class Contact {
     public String getGroup() { return group; }
     public Company getCompany() { return company; }
 
-  
+    public void setName(String name) { this.name = name; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setEmail(String email) { this.email = email; }
     public void setAddress(String address) { this.address = address; }
@@ -37,16 +36,12 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Name: " + fullName +
-               " | Phone: " + phoneNumber +
-               " | Email: " + email +
-               " | Address: " + address +
-               " | Birth Date: " + birthDate +
-               " | Group: " + group +
-               " | Company: " + company;
+        return name + " | " + phoneNumber + " | " + email + " | " + address + " | " + birthDate +
+                " | " + group + " | " + (company != null ? company : "No Company Info");
     }
 
-    Object getName() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getFullName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getFullName'");
     }
 }
